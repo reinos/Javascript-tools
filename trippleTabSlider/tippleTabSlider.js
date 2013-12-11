@@ -53,6 +53,16 @@
         $elem.find('.slider li:first').addClass('active');
         $elem.find('.slider li:not(:first)').hide();
 
+        $elem.find('.slider li').css({
+            position: 'relative',
+            zIndex : 2
+        });
+
+         $elem.find('.slider-pager li').css({
+            position: 'relative',
+            zIndex : 3
+        });
+
         //set  total items
         this.totalItems = $elem.find('.slider-pager li').length;
 
@@ -66,16 +76,12 @@
         if(this.totalItems > 1) {
             this.start();
         }
-
     };
 
     //next
     Plugin.prototype.next = function () {
         //shortcut
-        $elem =  $(this.element);
-
-        //set bussy indicator
-        this.bussy = true;
+        $elem =  $(this.element);  
 
         //new activeelem
         var activeElem = this.activeElem + 1;
@@ -87,14 +93,28 @@
 
         this.goTo(activeElem, this.activeElem);
 
-        //set bussy indicator
-        this.bussy = false;
     }
 
     //go to
     Plugin.prototype.goTo = function ( nr, old_nr ) {
         //shortcut
         $elem =  $(this.element);
+
+        //set bussy indicator
+        $elem.data('bussy', '1');
+
+        //remove old placeholder
+        $('.__placeholder__').remove();
+        
+        $elem.append('<div class="__placeholder__"/>');
+        $('.__placeholder__').css({
+            position: 'absolute',
+            left : 0,
+            top: 0,
+            zIndex: 1
+        });
+        $('.__placeholder__').append($elem.find('.slider li img').eq(nr).clone());
+       
 
         //remove all other actives
         $elem.find('.slider-pager li').removeClass('active');
@@ -106,11 +126,16 @@
 
         //fade old item out
         $elem.find('.slider li').eq(old_nr).fadeOut(function(){
-            $elem.find('.slider li').eq(nr).fadeIn();
+            $elem.find('.slider li').eq(nr).fadeIn(function(){
+                $('.__placeholder__').remove();
+            });
         });
 
         //assign
         this.activeElem = nr;  
+
+        //set bussy indicator
+        $elem.data('bussy', '0');
     }
 
     //start the queue
@@ -136,7 +161,7 @@
         $elem =  $(this.element);
 
         $elem.find('.slider-pager li').click(function(){
-            if(obj.bussy == false) {
+            if($elem.data('bussy') == 0) {
                 obj.stop();
                 obj.goTo($(this).data('indexNumber'), obj.activeElem);
                 obj.start();
