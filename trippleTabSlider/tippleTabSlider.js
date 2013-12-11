@@ -41,6 +41,9 @@
         //shortcut
         $elem =  $(this.element);
 
+        //set bussy indicator
+        $elem.data('bussy', '0');
+
         //show all
         $elem.show();
 
