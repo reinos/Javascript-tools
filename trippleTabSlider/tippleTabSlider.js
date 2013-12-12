@@ -139,9 +139,6 @@
 
         //assign
         this.activeElem = nr;  
-
-        
-        //
     }
 
     //start the queue
