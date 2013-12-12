@@ -130,15 +130,18 @@
         //fade old item out
         $elem.find('.slider li').eq(old_nr).fadeOut(function(){
             $elem.find('.slider li').eq(nr).fadeIn(function(){
+                //remove placeholder
                 $('.__placeholder__').remove();
+                //set bussy indicator
+                $elem.data('bussy', '0');
             });
         });
 
         //assign
         this.activeElem = nr;  
 
-        //set bussy indicator
-        $elem.data('bussy', '0');
+        
+        //
     }
 
     //start the queue
