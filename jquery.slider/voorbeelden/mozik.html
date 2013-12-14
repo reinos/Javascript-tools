@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>jQuery.Slider</title>
+<script src="../js/jquery-1.4.4.js"></script>
+<script src="../js/jquery.timer.js"></script>
+<script src="../js/jquery.easing.js"></script>
+<script src="../js/jquery.ui.widget.js"></script>
+<script src="../js/jquery.slider.js"></script>
+<script>
+$(window).load(function(){	
+	$('#slider').slider({
+		sliderType:'mozik',
+		numbers:true,
+		clickAnimationTime: 500,
+		animationTime : 2000,
+		interval: 2000,
+		arrows:{
+			left:{
+				src:'images/buttons.png',
+				style:{
+					height:'50px',
+					width:'31px',
+					position:'absolute',
+					left:'-6px',
+					zIndex:'99',
+					top:'80px'
+				}
+			},
+			right:{
+				src:'images/buttons.png',
+				style:{
+					backgroundPosition:'right top',
+					height:'50px',
+					width:'31px',
+					position:'absolute',
+					zIndex:'99',
+					right:'-6px',
+					top:'80px'
+				}	
+			}
+		},
+		mozik:{
+			horizontal:10,
+			vertical:4, 
+			type:'blok-random' //blok-(top/bottom)-(left/right) | blok-random | balk-slide-(left/right)
+		},
+		onInit : function(e, ui){
+			//$('#log').append('<div>init</div>');
+			//console.log(e, ui);
+		},
+		onStart : function(e, ui){
+			//$('#log').append('<div>start animatie</div>');
+			//console.log(e, ui);
+		},
+		onComplete : function(e, ui){
+			//$('#log').append('<div>complete animatie</div>');
+			//console.log(e,ui);
+		},
+		onClick : function(e, ui) {
+			//$('#log').append('<div>click event</div>');
+			//console.log(e,ui);
+		}
+	});
+
+	//version
+	var version = $('#slider').slider("option", "version");
+	$('h1').text("jQuery.Slider "+version+" (mozik)");
+	
+});
+</script>
+<style>
+#slider {
+	display:none;
+	padding:0;
+	margin:0;
+}
+	ul li.selected{
+		background:#000 !important;
+		color:#fff;
+	}
+</style>
+</head>
+<body style="background:#FFED01;background:#fff;">
+<h1></h1>
+<p>
+<a href="www.suneco.nl" target="_blank">by Suneco</a>
+</p>
+<h2>Example</h2>
+<div style="width:1000px; margin:0 auto 0 auto;">
+	<ul id="slider">
+		<li><img src="images/foto1.png"/></li>
+		<li><img src="images/foto2.png"/></li>
+		<li><img src="images/foto3.png"/></li>
+		<li><img src="images/foto4.png"/></li>
+		<li><img src="images/foto5.png"/></li>
+		<li><img src="images/foto6.png"/></li>
+		<li><img src="images/foto7.png"/></li>
+		<li><img src="images/foto8.png"/></li>	
+	</ul>
+</div>
+<div style="clear: both;"></div>
+<div style="font-size:10px;" id="log">
+</div>
+<h2>How to use</h2>
+<h3>Part 1 - Setup</h3>
+<ol>
+<li>
+Slider 1.0 maakt gebruik van het jQuery framework en jQueryUI framework. Je zal in totaal 3 files moeten toevoegen aan je document.<br/>
+<pre><code>&lt;script type="text/javascript" src="js/jquery.xxx.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.ui.widgets.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.slider.js"&gt;&lt;/script&gt; 
+</code>
+</pre>
+</li>
+<li>Voeg de volgende style toe aan je css
+<pre><code>#slider{ display:none; margin:0; padding:0; }  <b>VERPLICHT</b>
+#animatie_nr li.selected{ background:#000 !important; color:#fff; }
+</code></pre>
+</li>
+<li>
+Voeg de volgende html toe aan je document:
+<pre><code>&lt;ul id="slider"&gt;
+	&lt;li&gt;&lt;img src="images/foto1.png"/&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;img src="images/foto2.png"/&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;img src="images/foto3.png"/&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</li>
+</ol>
+<h3>Part 2 - Activate</h3>
+<ol>
+<li>
+Voeg in een script tag de volgende code
+<pre><code>$(window).ready(function(){
+	$('#slider').slider();
+)};</code></pre>
+<i><b>Note:</b> Let hierbij op dat je 'Window' gebruikt en geen 'document', dit omdat we de slider pas willen gaan gebruiken als alle images zijn geladen.
+<br/><b>Note:</b> Dit is de basis voor de slider.</i>
+</li>
+</ol>
+
+<h3>Part 3 - Config</h3>
+<ol>
+<li>
+<pre><code>$('#slider').slider({
+		sliderType:'fade', //type fade meegeven voor de fade
+		numbers:true, //nummer tonen waar je op kan klikken
+		clickAnimationTime: 500, //hoelang de animatie duurt wanneer je een user interaction hebt
+		animationTime : 800, //hoe lang duurt de animatie
+		interval: 2000, //om de hoeveel m/s slide de slider
+		arrows:{ //pijlen voor links en rechts
+			left:{
+				src:'images/buttons.png',
+				style:{
+					height:'50px',
+					width:'31px',
+					position:'absolute',
+					left:'-6px',
+					zIndex:'99',
+					top:'80px'
+				}
+			},
+			right:{
+				src:'images/buttons.png',
+				style:{
+					backgroundPosition:'right top',
+					height:'50px',
+					width:'31px',
+					position:'absolute',
+					zIndex:'99',
+					right:'-6px',
+					top:'80px'
+				}	
+			}
+		},
+		onInit : function(e, ui){
+			//callback voor de init 
+		},
+		onStart : function(e, ui){
+			//callback voor de onStart 
+		},
+		onComplete : function(e, ui){
+			//callback voor de onComplete 
+		},
+		onClick : function(e, ui) {
+			//callback voor de onClick, user-interaction 
+		}
+});</code></pre>
+Er is ook een fade effect met overlay, die wordt in <a href="fade-2.html">fade overlay</a> uitgelegd.
+</li>
+
+</ol>
+</body>
+</html>

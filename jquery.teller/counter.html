@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>jQuery counter</title>
+<script type="text/javascript" src="jquery.1.7.2.js"></script>
+<script type="text/javascript" src="jquery.counter.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#counter').counter();
+});
+</script>
+<style>
+body {
+	font: normal 100% "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif !important;
+	margin: 0;
+	padding: 0;
+	letter-spacing: 0;
+	border-bottom: 0 !important;
+}
+
+.clear {clear:both;}
+
+#counter {
+	display:block;
+}
+
+#counter .wrappers{
+	border-left: 1px solid #FFA526;
+	border-right: 1px solid #D07900;
+	background-color: #EE8B00;
+	backgroundimage:-moz-linear-gradient(100% 100% 90deg, #DE8200, #FE9500);
+	height:30px !important;
+}
+
+#counter .uls{
+	font-weight:bold;
+	color:#FFFFFF;
+	margin-top:5px !important;
+}
+
+#counter li {
+	height:30px !important;
+}
+
+</style>
+</head>
+<body>
+
+<div id="counter">672:5</div>
+<div class="clear"></div>
+</br>
+
+<div id="comment">
+	<h1>Usage</h1>
+	<p>Add the javascript in your head</p>
+	<p><pre>&lt;script type="text/javascript" src="jquery.1.7.2.js"&gt;&lt;/script&gt; <br/>&lt;script type="text/javascript" src="jquery.counter.min.js"&gt;&lt;/script&gt; <br/>&lt;script type="text/javascript" &gt;$(function(){$('#counter').counter();});&lt;/script&gt; </pre></p>
+	<p>Add a new div in your html with the following markup:</p>
+	<p><pre>&lt;div id="counter"&gt;672:5&lt;/div&gt;</pre></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+#slider in circular mode: als je op de laatste slide zit, en je klikt op 1, dan gaat hij vooruit opv achteruit.

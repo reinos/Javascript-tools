@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script src="jquery.1.4.2.js"></script>
+<script src="jquery.timer.js"></script>
+<script src="jquery.easing.js"></script>
+<script src="jquery.multipleSlider.js"></script>
+<script>
+$(window).ready(function(){	
+	$('#multipleSlider').multipleSlider({
+		easing:'bounce',
+		interval:2000,
+		animationTime:800,
+		items:7,
+		slideItems:2,
+		arrowLeft:'images/arrowLeft.png',
+		arrowRight:'images/arrowRight.png'
+	});
+});
+</script>
+<style>
+	#multipleSlider {
+		margin:0;
+		padding:0;
+		display:none;
+	}
+</style>
+
+</head>
+<body>
+<h1>jQuery.MultipleSlider 1.0</h1>
+<p>
+<a href="www.suneco.nl" target="_blank">by Suneco</a>
+</p>
+<h2>Example</h2>
+
+<ul id="multipleSlider">
+	<li><img src="images/bmw.png"/></li>
+	<li><img src="images/grolsch.png"/></li>
+	<li><img src="images/ikea.png"/></li>
+	<li><img src="images/praxis.png"/></li>	
+</ul>
+
+
+<h2>How to use</h2>
+<h3>Part 1 - Setup</h3>
+<ol>
+<li>
+MultipleSlider 1.0 maakt gebruik van het jQuery framework. Je zal in totaal 2 files moeten toevoegen aan je document.<br/>
+<pre><code>&lt;script type="text/javascript" src="js/jquery.xxx.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.multipleSlider.js"&gt;&lt;/script&gt; 
+</code>
+</pre>
+</li>
+<li>Voeg de volgende style toe aan je css
+<pre><code>#multipleSlider{ display:none; margin:0; padding:0; }  <b>VERPLICHT</b>
+</code></pre>
+</li>
+<li>
+Voeg de volgende html toe aan je document:
+<pre><code>&lt;ul id="slider"&gt;
+	&lt;li&gt;&lt;img src="images/foto1.png"/&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;img src="images/foto2.png"/&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;img src="images/foto3.png"/&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</li>
+</ol>
+<h3>Part 2 - Activate</h3>
+<ol>
+<li>
+Voeg in een script tag de volgende code
+<pre><code>$(window).ready(function(){
+	$('#slider').multipleSlider();
+)};</code></pre>
+<i><b>Note:</b> Let hierbij op dat je 'Window' gebruikt en geen 'document', dit omdat we de slider pas willen gaan gebruiken als alle images zijn geladen.
+<br/><b>Note:</b> Dit is de basis voor de slider.</i>
+</li>
+</ol>
+
+<h3>Part 3 - Config</h3>
+<ol>
+<li>
+<pre><code>$('#multipleSlider').multipleSlider({
+	easing:'swing/bounce/linear/quart/cubic/quint/sine/back/expo/circ/elastic', //default=swing
+	interval:2000, //om de hoeveel m/s slide de slider
+	animationTime:400, //hoe lang duurt de animatie
+	items:4, //aantal items om te tonen
+	slideItems:4, //aantal items om te sliden
+	arrowLeft:'images/arrowLeft.png', //pijl naar left
+	arrowRight:'images/arrowRight.png' //pijl naar rechts
+});</code></pre>
+</li>
+
+</ol>
+
+</body>
+</html>

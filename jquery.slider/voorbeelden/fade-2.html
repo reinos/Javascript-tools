@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>jQuery.Slider</title>
+<script src="js/jquery-1.4.4.js"></script>
+<script src="js/jquery.timer.js"></script>
+<script src="js/jquery.easing.js"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.slider.js"></script>
+<script>
+$(window).load(function(){
+	$('#slider').slider({
+		overlay:{
+			status:true,
+			overlayStyle:{
+				background:'black',
+				color:'white',
+				padding:'10px', 
+				width:'200px', 
+				margin:'5px'
+			},
+			show:'images/arrow_show_EURO.png',
+			hide:'images/arrow_hidden_EURO.png',
+			hidden:false
+		},
+		sliderType:'fade',
+		numbers:true,
+		clickAnimationTime: 500,
+		animationTime : 800,
+		interval: 2000,
+		onSliderInit : function(ui, items){
+			//$('#log').append('<div>init</div>');
+		   // console.log(item, items);
+		},
+		onSliderComplete: function (ui, items) {
+		    //$('#log').append('<div>init</div>');
+            console.log(ui)
+		},
+		onStart : function(ui, items){
+			//$('#log').append('<div>start animatie</div>');
+			//console.log(e, ui);
+		},
+		onComplete: function (ui, items) {
+			//$('#log').append('<div>complete animatie</div>');
+			//console.log(e,ui);
+		},
+		onClick: function (ui, items) {
+			//$('#log').append('<div>click event</div>');
+			//console.log(e,ui);
+		}
+	});
+});
+</script>
+
+
+
+<style>
+#slider h1, #slider p, #slider a {
+	display:none;
+}
+#s-overlayContent .more{
+	background:url(images/prefix.png) no-repeat 0 2px ;
+	height:23px;
+	padding:0 0 0 12px;
+	color:#fff;
+	display:block;
+	margin:10px 0 0 0;
+	font-size:12px;
+}
+
+#slider{
+	display:none;
+	margin:0;
+	padding:0;
+}
+
+#s-overlayContent h1{
+	font-size:16px;
+}
+#s-overlayContent p{
+	font-size:12px;
+}
+
+#s-animatie_nr {
+	background:#fff;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	position:absolute;
+	bottom:-3px;
+	right:-3px;
+	z-index:999999;
+	height:30px;
+}
+	#s-animatie_nr li{
+		background:url(images/EURO_bol_actief.png) no-repeat;
+		border:0 !important;
+		text-indent:-999999px;
+		width:20px;
+		height:20px;
+		margin:5px 0 0 0;
+	}
+	
+	ul li.selected{
+		background:url(images/EURO_bol_inactief.png) no-repeat !important;
+	}
+</style>
+</head>
+<body style="background:#eee;">
+<h1>jQuery.Slider 1.0 (Slider fade(2))</h1>
+<p>
+<a href="www.suneco.nl" target="_blank">by Suneco</a>
+</p>
+<h2>Example</h2>
+<div style="padding:10px 0 0 10px;background:url(images/sliderBG.png) no-repeat;width:703px;height:302px; margin:0 auto 0 auto;">
+	<ul id="slider">
+		<li>
+			<h1>Pagina 1</h1>
+			<p>lacinia ut massa. In hac habitasse plateroin justo risus, aliquam ut euismrem ipsum dolorroin justo risus, aliquam ut euismrem ipsum dolorroin justo risus, aliquam ut euismrem ipsum dolora dictumst, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin justo risus, aliquam ut euismod faucibus.</p>
+			<a href="#1">lees meer...</a>
+			<img src="images/EURO_1.png"/>
+		</li>	
+		<li>
+			<h1>Pagina 2</h1>
+			<p>Lorem  justo risus, aliquam ut euismod faucibus, lacinia ut massa. In hac habitasse platea  ipsum dolor sit amet, consectetur adipiscing elit. Proindictumst.</p>			
+			<a href="#2">lees meer...</a>
+			<img src="images/EURO_2.png"/>
+		</li>	
+		<li>
+			<h1>Pagina 3</h1>
+			<p>Lo ing elit. Proin justo risus, aliquam ut euismrem roin justo risus, aliquam ut euismrem ipsum doloripsum dolor sit amet, consectetur adipisc a. In hac habitasse platea di od faucibus, lacinia ut massctumst.</p>
+			<a href="#3">lees meer...</a>
+			<img src="images/EURO_3.png"/>
+		</li>	
+		<li>
+			<h1>Pagina 4</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin justo risus, aliquam ut euismod faucibus, lacinia ut massa. In hac habitasse platea dictumst.</p>
+			<a href="#4">lees meer...</a>
+			<img src="images/EURO_4.png"/>
+		</li>	
+		<li>
+			<h1>Pagina 5</h1>
+			<p>usto risus, aliquam ut euismod faucibus, lacinia ut mas Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin jsa. In hac habitasse platea dictumst.</p>
+			<a href="#5">lees meer...</a>
+			<img src="images/EURO_5.png"/>
+		</li>	
+	</ul>
+</div>
+<div style="clear: both;"></div>
+<div style="font-size:10px;" id="log">
+</div>
+<h2>How to use</h2>
+<h3>Part 1 - Setup</h3>
+<ol>
+<li>
+Slider 1.0 maakt gebruik van het jQuery framework en jQueryUI framework. Je zal in totaal 3 files moeten toevoegen aan je document.<br/>
+<pre><code>&lt;script type="text/javascript" src="js/jquery.xxx.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.ui.widgets.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.slider.js"&gt;&lt;/script&gt; 
+</code>
+</pre>
+</li>
+<li>Voeg de volgende style toe aan je css
+<pre><code>#slider{ display:none; margin:0; padding:0; }  <b>VERPLICHT</b>
+#animatie_nr li.selected{ background:#000 !important; color:#fff; }
+#slider h1, #slider p, #slider a {display:none;}
+#overlayContent .more{background:url(images/prefix.png) no-repeat 0 2px ;height:23px;padding:0 0 0 12px;color:#fff;display:block;margin:10px 0 0 0;font-size:12px;}
+#slider{display:none;margin:0;padding:0;}
+#overlayContent h1{font-size:16px;}
+#overlayContent p{font-size:12px;}
+#animatie_nr {background:#fff;-moz-border-radius:5px;-webkit-border-radius:5px;position:absolute;bottom:-3px;right:-3px;z-index:999999;height:30px;}
+#animatie_nr li{background:url(images/EURO_bol_actief.png) no-repeat;border:0 !important;text-indent:-999999px;width:20px;height:20px;margin:5px 0 0 0;}
+#animatie_nr li.selected{background:url(images/EURO_bol_inactief.png) no-repeat !important;}
+</code></pre>
+</li>
+<li>
+Voeg de volgende html toe aan je document:
+<pre><code>&lt;ul id="slider"&gt;
+	&lt;li&gt;
+		&lt;h1&gt;Pagina 1&lt;/h1&gt;
+		&lt;p&gt;lacinia ut massa. In hac habitasse plateroin justo risus, aliquam ut euismrem ipsum dolorroin justo risus, aliquam ut euismre&lt;/p&gt;
+		&lt;a href="#1"&gt;lees meer...&lt;/a&gt;
+		&lt;img src="images/foto1.png"/&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;h1&gt;Pagina 2&lt;/h1&gt;
+		&lt;p&gt;lacinia ut massa. In hac habitasse plateroin justo risus, aliquam ut euismrem ipsum dolorroin justo risus, aliquam ut euismre&lt;/p&gt;
+		&lt;a href="#2"&gt;lees meer...&lt;/a&gt;
+		&lt;img src="images/foto2.png"/&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</li>
+</ol>
+<h3>Part 2 - Activate</h3>
+<ol>
+<li>
+Voeg in een script tag de volgende code
+<pre><code>$(window).ready(function(){
+	$('#slider').slider();
+)};</code></pre>
+<i><b>Note:</b> Let hierbij op dat je 'Window' gebruikt en geen 'document', dit omdat we de slider pas willen gaan gebruiken als alle images zijn geladen.
+<br/><b>Note:</b> Dit is de basis voor de slider.</i>
+</li>
+</ol>
+
+<h3>Part 3 - Config</h3>
+<ol>
+<li>
+<pre><code>$('#slider').slider({
+		overlay:{ //overlay
+			status:true, //overlay status
+			overlayStyle:{ //style van de overlay
+				background:'black',
+				color:'white',
+				padding:'10px', 
+				width:'200px', 
+				margin:'5px'
+			},
+			show:'images/arrow_show_EURO.png', //show button
+			hide:'images/arrow_hidden_EURO.png', //hidden button
+			hidden:false // auto hide
+		},
+		sliderType:'fade', //type fade meegeven voor de fade
+		numbers:true, //nummer tonen waar je op kan klikken
+		clickAnimationTime: 500, //hoelang de animatie duurt wanneer je een user interaction hebt
+		animationTime : 800, //hoe lang duurt de animatie
+		interval: 2000, //om de hoeveel m/s slide de slider
+		onInit : function(e, ui){
+			//callback voor de init 
+		},
+		onStart : function(e, ui){
+			//callback voor de onStart 
+		},
+		onComplete : function(e, ui){
+			//callback voor de onComplete 
+		},
+		onClick : function(e, ui) {
+			//callback voor de onClick, user-interaction 
+		}
+});</code></pre>
+</li>
+
+</ol>
+<b>Andere slider effecten:</b><br />
+<a href="fade-1.html">fade-1 effect</a><br />
+<a href="bounce.html">bounce effect</a><br />
+<a href="slider-1.html">slider-1 effect</a><br />
+</body>
+</html>
