@@ -1,0 +1,1 @@
+This plugin is based upon the CoffeeScript eqHeight plugin (https://github.com/jsliang/eqHeight.coffee)
