@@ -7,10 +7,11 @@
 ;(function ( $, window, document, undefined ) {
 
     // Create the defaults once
+    // heights - http://www.texelate.co.uk/blog/jquery-whats-the-difference-between-height-innerheight-and-outerheight/	
     var pluginName = 'eqHeight',
         defaults = {
-            refresh : false,
-            column_selector : ''
+        	accountForPadding				: false, // true , false 
+            columnSelector	 				: ''	
         };
 
     // The actual plugin constructor
@@ -19,7 +20,7 @@
 
         //if the options var is a string, just put this as the column_selector
         if(typeof(options) === 'string') {
-            options.column_selector = options;
+            options.columnSelector = options;
         }
 
         // the default options for future instances of the plugin
@@ -39,11 +40,11 @@
             obj = this;
 
         //get the elements
-        obj.columns = $elem.find(obj.options.column_selector);
+        obj.columns = $elem.find(obj.options.columnSelector);
 
         //nothing found, we get the first set of children
         if (obj.columns.length === 0) {
-          obj.columns = $elem.children(obj.options.column_selector);
+          obj.columns = $elem.children(obj.options.columnSelector);
         }
 
         //still no luck, return
@@ -52,7 +53,7 @@
         }
 
         //start ewualizing
-        obj.equalizer(); 
+        //obj.equalizer(); 
 
         //start after 100ms, so we are sure everything is loaded 
         setTimeout(function(){
@@ -73,50 +74,103 @@
         obj.columns.height("auto");
 
         //get the first height
-        var row_top_value = obj.columns.first().position().top;
+        var rowTopValue = obj.columns.first().position().top;
+        
+        var paddingTop, paddingBottom;
 
         //loop over all the elements
         obj.columns.each(function() {
             //set the var for the height
-            var current_top;
+            var currentTop;
 
             //get  the current top
-            current_top = $(this).position().top;
-            
+            currentTop = $(this).position().top;
+        
             //do we have the set the height?
-            if (current_top !== row_top_value) {
-                obj.equalize_marked_columns();
-                row_top_value = $(this).position().top;
+            //@todo, need figure out why this code is needed... :-|
+            if (currentTop !== rowTopValue) {
+                obj.equalizeMarkedColumns();
+                rowTopValue = $(this).position().top;
             }
-            return $(this).addClass("eqHeight_row");
+
+			//do we need to take care of paddings?
+			if(obj.options.accountForPadding) {
+				//mark the element which need to be reparsed due the padding            
+	            paddingTop = parseInt($(this).css("padding-top").replace("px", ""));
+	        	paddingBottom = parseInt($(this).css("padding-bottom").replace("px", ""));
+	        	
+	        	//set the paddingTop
+	        	if(paddingTop > 0 || paddingBottom > 0) {
+		        	$(this).addClass('eqHeightPadding');
+	        	}
+	        }
+            
+            //mark the div with a class
+            $(this).addClass("eqHeight_row");
         });
-        return obj.equalize_marked_columns();
+        
+        //lets eqHeight all the marked columns
+        obj.equalizeMarkedColumns();
+        
+        //lets do the padding calculation
+        obj.equalizePaddings()
     };
 
-    Plugin.prototype.equalize_marked_columns = function () {
+	//eqHeight the marked columns
+    Plugin.prototype.equalizeMarkedColumns = function () {
         var $elem = $(this.element),
             obj = this;
 
         //set vars
-        var marked_columns, max_col_height;
+        var markedColumns, maxColHeight, paddingTop, paddingBottom;
 
         //get the markerd element
-        marked_columns = $(".eqHeight_row");
+        obj.markedColumns = $(".eqHeight_row");
 
         //default height
-        max_col_height = 0;
+        maxColHeight = 0; 
        
         //loop over the marked columns
-        marked_columns.each(function() {
-            //return the value
-            return max_col_height = Math.max($(this).height(), max_col_height);
-        });
+        obj.markedColumns.each(function() {
+        	        	        
+        	//calculate the heighest value
+        	maxColHeight = Math.max($(this).height(), maxColHeight);
+	        	
+		});
 
         //set the height
-        marked_columns.height(max_col_height);
+        obj.markedColumns.height(maxColHeight);
 
         //remove the class markerd indicator
-        return $(".eqHeight_row").removeClass("eqHeight_row");
+        $(".eqHeight_row").removeClass("eqHeight_row");
+    };
+    
+    //eqHeight the paddings
+    Plugin.prototype.equalizePaddings = function () {
+        var $elem = $(this.element),
+            obj = this;
+
+		//do we need to proceed?
+        if(obj.options.accountForPadding) {
+	        
+	        var maxColHeight = 0;
+	  
+	        //lets get the height we need
+        	$elem.find('.eqHeightPadding').each(function(){
+				maxColHeight = Math.max($(this).innerHeight(), maxColHeight);	        	
+        	});
+        	
+        	//reset the height to the padding
+        	obj.markedColumns.each(function() {
+        		//do not set the height of an padding elem
+        		if(!$(this).hasClass('eqHeightPadding')) {
+	        		$(this).height(maxColHeight);
+        		}
+			});
+        }
+
+        //remove the class markerd indicator
+        $(".eqHeightPadding").removeClass("eqHeightPadding");
     };
 
     // A really lightweight plugin wrapper around the constructor,
