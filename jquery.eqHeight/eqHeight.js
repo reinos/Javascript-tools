@@ -1,3 +1,9 @@
+/**
+ * based on (https://github.com/jsliang/eqHeight.coffee)
+ * 
+ * eqheight.js
+*/
+
 ;(function ( $, window, document, undefined ) {
 
     // Create the defaults once
