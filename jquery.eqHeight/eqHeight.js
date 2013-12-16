@@ -151,7 +151,7 @@
             obj = this;
 
 		//do we need to proceed?
-        if(obj.options.accountForPadding) {
+        if(obj.options.accountForPadding && $elem.find('.eqHeightPadding').length) {
 	        
 	        var maxColHeight = 0;
 	  
@@ -161,12 +161,14 @@
         	});
         	
         	//reset the height to the padding
-        	obj.markedColumns.each(function() {
-        		//do not set the height of an padding elem
-        		if(!$(this).hasClass('eqHeightPadding')) {
-	        		$(this).height(maxColHeight);
-        		}
-			});
+        	if(maxColHeight > 0) {
+	        	obj.markedColumns.each(function() {
+	        		//do not set the height of an padding elem
+	        		if(!$(this).hasClass('eqHeightPadding')) {
+		        		$(this).height(maxColHeight);
+	        		}
+				});
+			}
         }
 
         //remove the class markerd indicator
