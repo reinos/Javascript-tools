@@ -17,6 +17,10 @@
 				<input type="hidden" name="{member_id}">
 			</a>
 		</li>
+		
+		{if no_results}
+        	 <h4>Er zijn geen resultaten voor <i>{freebie_3}</i></h4>
+    	{/if}
 	{/exp:low_alphabet:entries}
 
 {/if}
@@ -47,8 +51,8 @@
 			</li>
 	    {/exp:channel:entries}
 	    
-	    {if no_results}
-        	 <h1 >Er zijn geen resultaten voor <i>{freebie_4}</i></h1>
+	   {if no_results}
+        	 <h4>Er zijn geen resultaten voor <i>{freebie_4}</i></h4>
     	{/if}
 	{/exp:search_fields}
 {/if}
