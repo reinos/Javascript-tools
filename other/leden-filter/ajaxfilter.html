@@ -1,0 +1,112 @@
+<!-- overzicht -->
+{if freebie_3 !="search" && freebie_4 == ""}
+	<h1>{exp:low_alphabet:uppercase text="{freebie_3}"}</h1>
+	{exp:low_alphabet:entries channel="zoo_visitor" status="Partners-id7" alpha_field="{member_bedrijfsnaam}" alpha_filter="{freebie_3}"}
+		<li>			
+			<a href="#" onClick="return false;">
+				<h3>{member_bedrijfsnaam}</h3>
+				<h5>{member_firstname} {member_lastname}</h5>
+				
+				<!--<h6></h6>-->
+				{embed="embeds/.afbeelding"
+					src="{member_bedrijfslogo}" 
+					width="200" 
+					height="110" 
+					title="{member_foto_persoon}"
+				}
+				<input type="hidden" name="{member_id}">
+			</a>
+		</li>
+	{/exp:low_alphabet:entries}
+
+{/if}
+
+<!-- zoekfunctie -->
+{if freebie_3 == "search"}
+	{exp:search_fields 
+	    search:title="{freebie_4}" 
+	    channel="zoo_visitor" 
+	    parse="inward"}
+	    
+	    {exp:channel:entries status="Partners-id7" entry_id="{search_results}" disable="categories" dynamic="no" orderby="title" sort="asc"}
+			<li>
+				<a href="#" onClick="return false;">
+				<h3>{member_bedrijfsnaam}</h3>
+				<h5>{member_firstname} {member_lastname}</h5>
+				
+				<!--<h6></h6>-->
+				{embed="embeds/.afbeelding"
+					src="{member_bedrijfslogo}" 
+					width="200" 
+					height="110" 
+					title="{member_foto_persoon}"
+				}
+						
+					<input type="hidden" name="{member_id}">
+				</a>
+			</li>
+	    {/exp:channel:entries}
+	    
+	    {if no_results}
+        	 <h1 >Er zijn geen resultaten voor <i>{freebie_4}</i></h1>
+    	{/if}
+	{/exp:search_fields}
+{/if}
+
+<!--Detail weergave member-->
+{if freebie_3 != "search" && freebie_4 != ''}
+	{exp:zoo_visitor:details member_id="{freebie_4}"}
+		<div class="member-detail">
+			<div class="member-detail-inner">
+				<div class="member-detail-content">
+					<div class="left">
+						<h3>{member_bedrijfsnaam}</h3>
+						<h5>{member_firstname} {member_lastname}</h5>
+						
+						{embed="embeds/.afbeelding"
+							src="{member_foto_persoon}" 
+							height="300" 
+							title="{member_foto_persoon}"
+						}
+				
+						
+						<h3>Privé gegevens:</h3>
+						<address>
+	    					<ul>
+	    						<li>{member_adres}</li>
+	    						<li>{member_postcode_plaats}</li>
+	    						<li>T. {member_telefoonnummer}</li>
+	    						<li>E. {member_email_bedrijf}</li>
+	    					</ul>
+	    				</address>
+					</div>
+					<div class="right">
+						{embed="embeds/.afbeelding"
+							src="{member_bedrijfslogo}" 
+							width="200" 
+							height="110" 
+							title="{member_foto_persoon}"
+						}
+						
+						<div class="member-detail-right">
+							<h3>{member_bedrijfsnaam}</h3>
+							<address>
+								<ul>
+									<li>{member_adres}</li>
+									<li>{member_postcode_plaats}</li>
+									<li>T. {member_telefoonnummer}</li>
+									<li><a href="mailto:" class="mailto">{member_e_mailadres_bedrijf}</a></li>
+									<li><a href="{member_website_bedrijf}" target="_blank" class="button" >Bezoek de website</a></li>
+								</ul>
+							</address>
+						</div>
+					</div>
+				</div>
+				<div class="member-detail-footer">
+					<a href="#" onClick="return false;">&laquo; terug naar overzicht</a>
+				</div>
+			</div>
+		</div>
+	{/exp:zoo_visitor:details}
+{/if}
+

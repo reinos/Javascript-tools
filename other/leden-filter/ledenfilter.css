@@ -1,0 +1,227 @@
+
+.members {
+  
+  .search {
+    .boxmodel;
+    padding-right: 20px;
+    
+    input {
+      .boxmodel;
+      width: 100%;
+      padding: 5px 5px 5px 25px;
+      border: 1px solid darken(@wit,25%);
+      background: @wit url('/assets/images/icon-search.png') no-repeat 5px center;
+      #shadow > .inner(0,1px,2px,0.15);
+      #border > .rounded(5px);
+      
+      &.hasPlaceholder {
+        color: darken(@wit,25%);
+      }
+    }
+  }
+  .clearfix;
+  border-top: 1px solid darken(@wit,15%);
+  border-bottom: 1px solid darken(@wit,15%);
+  background: darken(@wit,5%);
+  margin-bottom: 30px;
+  
+  .member-tab-nav {
+    border-top: 8px solid @wit;
+    border-bottom: 1px solid darken(@wit,15%);
+    background: darken(@wit,10%);
+    display:inline-block;
+    
+    ul {
+      .clearfix;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        position: relative;
+        display: block;
+        float: left;
+        margin: 0 4px;
+        
+        a {
+          display: block;
+          padding: 5px 10px;
+          border: 0;
+          font-size: @basefont * 1.2;
+          color: lighten(@zwart,50%);
+          
+          &:hover {
+            color: @zwart;
+          }
+        }
+        
+        &.active {
+          a {
+            background: darken(@wit,5%);
+            padding: 10px 10px 6px 10px;
+            margin: -6px 0 -1px;
+            border: 1px solid darken(@wit,15%);
+            border-bottom: 0;
+            #border > .radius(4px,0,0,4px);
+            #shadow > .drop(0,2px,5px,0.1);
+            color: @rood;
+          }
+        }
+      }
+    }
+  }
+  
+  .member-search {
+    position: relative;
+    z-index: 2;
+    background: darken(@wit,5%);
+    padding: 40px 40px 20px 40px;
+  }
+  
+  .inner-result {
+    padding:0 0 0 25px;
+    display:block;
+  }
+  
+  h1{
+    margin-left:10px;
+  }
+  
+  .member-cards {
+    .clearfix;
+    margin: 0;
+    padding: 0 0 40px 0;
+    list-style: none;
+    border-bottom: 8px solid @wit;
+    
+    li {  
+      .grid(9,4);  
+      margin-bottom:20px;
+      
+      &:first-child {
+        margin-left:10px;
+      } 
+       
+      address {
+        margin-bottom:5px;;
+      }
+      
+      p {
+        margin-bottom:5px;  
+      }
+      
+      a {
+        
+        &.mailto {
+          padding:0;
+          display:inline;
+          border-bottom: 1px solid @rood;
+          -webkit-box-shadow:none;
+          box-shadow:none;
+
+          &:hover {
+            -webkit-box-shadow:none;
+            box-shadow:none;
+          }
+        }
+
+        position: relative;
+        display: block;
+        background: @wit;
+        padding: 30px;
+        border: 1px solid @wit;
+        #shadow > .both(0,2px,5px,0.25,#000,0,0,20px,0.1,#000);
+        #transition > .all;
+        
+        &:hover {
+          z-index: 2;
+          #shadow > .both(5px,12px,25px,0.15,#000,0,0,20px,0.06,#000);
+        }
+
+        &.button {
+          .button;
+        }
+      }
+    }
+  }
+  
+  .member-detail {
+    // border-bottom: 8px solid @wit;
+    .grid(9,8.5); 
+    
+    .member-detail-inner {
+      position: relative;
+      background: @wit;
+      margin-bottom: 40px;
+      #shadow > .drop(0,2px,5px,0.25,#000);
+      
+      &:after {
+        position: absolute;
+        content: "";
+        display: block;
+        width: 1px;
+        height: 86%;
+        background: darken(@wit,10%);
+        left: 50%;
+        top: 50%;
+        margin-top: -47%;
+      }
+      
+      .member-detail-content {
+        .clearfix;
+        border-top: 1px solid @wit;
+        #shadow > .inner(0,0,20px,0.1,#000);
+        display:inline-block;
+        
+         .left {
+            .grid(10,4.3); 
+          }
+          .right {
+            .grid(10,4.4); 
+          }
+         padding:25px;
+        
+        ul {
+          margin-top:10px;
+          list-style: none;
+          padding: 0;
+          
+          li {
+            margin:0;
+            padding:0;
+          }
+        }
+        
+        address {
+          font-style: normal;
+        }
+      }
+      
+      .member-detail-img {
+        margin: 10px 0 20px;
+        #shadow > .drop(0,2px,5px,0.25,#000); 
+      }
+      
+      .member-detail-stamp {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+      }
+      
+      .member-detail-right {
+        margin-top: 100px;
+        
+        .button {
+          margin-top: 15px;
+        }
+      }
+      
+      .member-detail-footer {
+        .clearfix;
+        border-top: 1px solid darken(@wit,15%);
+        padding: 5px 10px;
+        #gradient > .vertical(darken(@wit,5%),darken(@wit,10%),darken(@wit,5%));
+      }
+    }
+  }
+}

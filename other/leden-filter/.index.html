@@ -1,0 +1,36 @@
+<div class="members ledenfilter-wrapper">
+	{if logged_in}<span style="display:none;" class="is_logged">&nbsp;</span>{/if}
+	<nav class="member-tab-nav">
+		<ul>						
+			{exp:low_alphabet:azlist
+			    channel="zoo_visitor"
+			    status="Members-id5"
+			    orderby="member_voornaam"
+			    alpha_field="member_voornaam"
+			    sort="asc"
+			    show_empty="yes"
+			    numbers="no"
+			}
+			    <li data-char="{low_alphabet_url}">
+			        <a href="javascript:;">{low_alphabet_url}</a>
+			    </li>
+			{/exp:low_alphabet:azlist}
+		</ul>
+	</nav>
+	
+	<div class="member-search search">
+		<input type="search" id="search" placeholder="Zoeken naar bedrijven of personen" />			
+	</div>
+	
+	<!--Overzicht members-->
+	<div id="wrapper-resultaat" style="position:relative;left:0;overflow:hidden;margin-bottom:30px;">
+		<div class="inner-result">
+			<ul class="member-cards equal-cards" id="resultaat" rel="a" style="border-bottom:0;position:relative;left:0;height:auto;">
+				<li>dsfsf</li>
+			</ul>
+		</div>
+	</div>
+	<div name="whitebottom" style="height:8px;background-color: #ffffff;">&nbsp;</div>
+</div>
+
+<script src="/ledenfilter/ledenfilter_js"></script>
