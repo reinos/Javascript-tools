@@ -1,0 +1,13 @@
+[
+{exp:channel:entries dynamic="no" status="Members-id5" }
+	{ 
+	    "name": "{member_voornaam} {member_tussenvoegsel} {member_achternaam}",
+	    "unixDate": "{member_geboortedatum}",
+	    "year": "{member_geboortedatum format="%Y"}",
+	    "monthName": "{member_geboortedatum format="%F"}",
+	    "month": "{member_geboortedatum format="%m"}",
+	    "day": "{member_geboortedatum format="%d"}"
+	  }	
+	{if total_results != count},{/if}					
+{/exp:channel:entries}	
+]
