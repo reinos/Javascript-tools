@@ -96,7 +96,7 @@
 
         this.goTo(activeElem, this.activeElem);
 
-    }
+    };
 
     //go to
     Plugin.prototype.goTo = function ( nr, old_nr ) {
@@ -116,9 +116,11 @@
             top: 0,
             zIndex: 1
         });
+        
+        //add a clone for the crossfade ffx
         $('.__placeholder__').append($elem.find('.slider li img').eq(nr).clone());
+        $('.__placeholder__ img').css('height', $elem.height());
        
-
         //remove all other actives
         $elem.find('.slider-pager li').removeClass('active');
         $elem.find('.slider li').removeClass('active');
@@ -139,7 +141,7 @@
 
         //assign
         this.activeElem = nr;  
-    }
+    };
 
     //start the queue
     Plugin.prototype.start = function () {
@@ -149,12 +151,12 @@
         this.timer = setInterval(function(){
             obj.next();
         }, obj.options.timeout);
-    }
+    };
 
     //start the queue
     Plugin.prototype.stop = function () {
         clearInterval(this.timer);
-    }
+    };
 
     //add events
     Plugin.prototype.addEvents = function () {
@@ -164,13 +166,18 @@
         $elem =  $(this.element);
 
         $elem.find('.slider-pager li').click(function(){
-            if($elem.data('bussy') == 0) {
-                obj.stop();
-                obj.goTo($(this).data('indexNumber'), obj.activeElem);
-                obj.start();
+            if($(this).data('link') != '') {
+                document.location = $(this).data('link');               
+                
+            } else {
+                if($elem.data('bussy') == 0) {
+                    obj.stop();
+                    obj.goTo($(this).data('indexNumber'), obj.activeElem);
+                    obj.start();
+                }
             }
         });
-    }
+    };
 
     //add numbers
     Plugin.prototype.addNumbers = function () {
@@ -181,7 +188,7 @@
         $elem.find('.slider-pager li').each(function(k,v){
             $(v).data('indexNumber', k);
         });
-    }
+    };
 
 
     // A really lightweight plugin wrapper around the constructor,
@@ -193,6 +200,6 @@
                 new Plugin( this, options ));
             }
         });
-    }
+    };
 
 })( jQuery, window, document );
