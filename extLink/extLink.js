@@ -52,6 +52,11 @@
 	        
 	    return this.each(function(){
 
+	    	//do nothing when there is an hash or javascript statement.
+	    	if(this.href == '#' || this.href == 'javascript:;') {
+				return;
+			}
+
 	    	if(!extValid.test(this.href)) {
 	    		this.target="_blank";
 	    	}
