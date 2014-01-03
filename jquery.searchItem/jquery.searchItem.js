@@ -8,8 +8,9 @@
     var pluginName = 'searchItem',
         defaults = {
             input: '',
-            searchOn : '',
-            wrapper : ''
+            searchOn : [],
+            wrapper : '',
+            reset : ''
         };
 
     // The actual plugin constructor
@@ -42,27 +43,41 @@
            timer = setTimeout(function(){
                 obj.searchItem(value);
            }, 300);
-           
         });
+        
+        //add reset button
+        //$(obj.options.reset).click();
     };
 
     //search
     Plugin.prototype.searchItem = function (val) {
-         var obj = this,
+        var obj = this,
             $elem = $(this.element);
+            
+        var found = [];
 
         //look inside the element
-        $elem.find(obj.options.searchOn).each(function(){
-            var text = $(this).text().replace(/ +(?= )/g,'').toLowerCase();
-          
-            if(text.indexOf(val) >= 0) {
-               $(this).parents(obj.options.wrapper).hide().show();
-            } else {
-               $(this).parents(obj.options.wrapper).hide().hide();
-            }
+        $.each(obj.options.searchOn, function(k, value){
+            $elem.find(value).each(function(){
+                var text = $(this).text().replace(/ +(?= )/g,'').toLowerCase();
+                
+                //check
+                if(text.indexOf(val) >= 0) {
+                   found.push($(this).parents(obj.options.wrapper));
+                } 
+            });
         });
-    }
-
+        
+        //hide first all items
+        $(obj.options.wrapper).hide();
+        
+        //show the result
+        $.each(found, function(k,v){
+            v.show();
+        });
+        
+    };
+    
     // A really lightweight plugin wrapper around the constructor,
     // preventing against multiple instantiations
     $.fn[pluginName] = function ( options ) {
@@ -72,6 +87,6 @@
                 new Plugin( this, options ));
             }
         });
-    }
+     };
 
 })( jQuery, window, document );
