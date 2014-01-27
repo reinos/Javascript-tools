@@ -8,8 +8,6 @@
     // Create the defaults once
     var pluginName = 'stickyFooter',
         defaults = {
-            animate: false,
-            animateTime : 200,
             removeNegativMargin : true,
             css : {}
         };
@@ -37,9 +35,9 @@
 		
 		obj.positionFooter();
 		
-    	 $(window)
-               .scroll(obj.positionFooter)
-               .resize(obj.positionFooter);
+    	$(window)
+               .scroll(function(){obj.positionFooter();})
+               .resize(function(){obj.positionFooter();});
     };
 	
 	// set the position
@@ -47,52 +45,27 @@
 	     var obj = this,
 	     	$elem = $(this.element); 
          
-        //get the values  
-        obj.footerHeight = $elem.height();
-        obj.footerTop = ($(window).scrollTop()+$(window).height()-obj.footerHeight)+"px";
- 	
- 		// is there a negativ marign?
- 		if(obj.options.removeNegativMargin && $elem.css('margin-top')[0] == '-') {
- 			$elem.css('margin-top', 0);	
- 		}
-	 	
- 		//what do we need to do?
-		if ( ($(document.body).height()+obj.footerHeight) < $(window).height()) {
-			
-			//do we need to animate
-			if(obj.options.animate) {
-				//css
-				var css = $.extend( {}, {
-					position: "absolute"
-				}, obj.options.css);
-			
-				//set the styles
-				$elem.css(css).animate({
-					top: obj.footerTop
-				}, obj.options.animateTime);
-				
-			//no animation
-			} else {
-				//css
-				var css = $.extend( {}, {
-					position: "absolute",
-					top: obj.footerTop
-				}, obj.options.css);
-				
-				//set the styles
-				$elem.css(css);
-			}
-			
-		} else {
+         obj.footerHeight = $elem.height();
+       
+		// is there a negativ marign?
+		if(obj.options.removeNegativMargin && $elem.css('margin-top')[0] == '-') {
+			$elem.css('margin-top', 0);	
+		}
+       
+		if ( ($(document.body).height()+(obj.footerHeight)) < $(window).height()) {
 			//css
 			var css = $.extend( {}, {
-				position: "static"
+				position: "fixed",
+				bottom: 0,
+				left:0,
+				right:0
 			}, obj.options.css);
-				
-			//set the styles
+			
+			//must stick to bottom
 			$elem.css(css);
+		} else {
+			$elem.attr("style", "");
 		}
-
 	};
 
     // A really lightweight plugin wrapper around the constructor,
