@@ -53,19 +53,20 @@
 		}
        
 		if ( ($(document.body).height()+(obj.footerHeight)) < $(window).height()) {
-			//css
-			var css = $.extend( {}, {
-				position: "fixed",
-				bottom: 0,
-				left:0,
-				right:0
-			}, obj.options.css);
-			
-			//must stick to bottom
-			$elem.css(css);
-		} else {
-			$elem.attr("style", "");
-		}
+            //css
+            var css = $.extend( {}, {
+                position: "fixed",
+                bottom: 0,
+                left:0,
+                right:0
+            }, obj.options.css);
+            
+            //must stick to bottom
+            $elem.css(css);
+        } else {
+            $elem.prop("style", "");
+            $elem.css(obj.options.css);
+        }
 	};
 
     // A really lightweight plugin wrapper around the constructor,
