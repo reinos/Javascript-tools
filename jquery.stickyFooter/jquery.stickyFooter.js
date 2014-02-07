@@ -65,6 +65,7 @@
             $elem.css(css);
         } else {
             $elem.prop("style", "");
+            $elem.attr("style", "");
             $elem.css(obj.options.css);
         }
 	};
