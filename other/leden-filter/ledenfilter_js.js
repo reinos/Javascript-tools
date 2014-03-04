@@ -1,5 +1,7 @@
 $(function(){
-    $('.ledenfilter-wrapper').ledenFilter();
+    $('.ledenfilter-wrapper').ledenFilter({
+        itemsLoaded : function(){};
+    });
 });
 
 ;(function ( $, window, document, undefined ) {
@@ -17,7 +19,8 @@ $(function(){
             loggedInClass : '.is_logged',
             loggedIn : false,
             restrict : true,
-            searchDiv : "#search"
+            searchDiv : "#search",
+            itemsLoaded : function(){}
         };
 
     // The actual plugin constructor
@@ -60,9 +63,14 @@ $(function(){
             obj.options.loggedIn = true;
         }
         
+        //if the hash is filled in, then select that one
+        if(location.hash != '') {
+            obj.getDetail(location.hash.replace('#', ''), 'a');  
+        }
         //get the first selection "a"
-        this.get('overview', 'a');
-        
+        else {
+            this.get('overview', 'a');
+        }
     };
     
     //Get a selection based on the char
@@ -129,6 +137,11 @@ $(function(){
                 if(typeof(callback) == 'function') {
                     callback();
                 }
+                
+                //fire other callback
+                if(typeof(obj.options.itemsLoaded) == 'function') {
+                    obj.options.itemsLoaded();
+                }
             });
         }, 500);
     };
@@ -166,18 +179,34 @@ $(function(){
             var id = $(this).children("input").attr("name");
             var search_char = $(obj.options.tabClass + ' ul li.active').data('char');
             
-            //get the detail
-            obj.get('detail', search_char, id, function(){
-                //add the click events for back
-                $('.member-detail-footer a').click(function(e){ 
-                    e.preventDefault();
-                    
-                    //get back to the overview  
-                    obj.get('overview', search_char);
-                });
-            });         
+            //set the hash
+            location.hash = id;
+            
+            //get the detail window
+            obj.getDetail(id, search_char);       
         });
     };
+    
+    //get the detail window
+   Plugin.prototype.getDetail = function (id, search_char){
+        //default vars
+        var $elem = $(this.element),
+            obj = this;
+
+        //get the detail
+        obj.get('detail', search_char, id, function(){
+            //add the click events for back
+            $('.member-detail-footer a').click(function(e){ 
+                e.preventDefault();
+                
+                //remove the hash
+                location.hash = '';
+                
+                //get back to the overview  
+                obj.get('overview', search_char);
+            });
+        });  
+   };
     
     //add a onclick on the tabs
     Plugin.prototype.addSearch = function () {
@@ -251,8 +280,8 @@ $(function(){
     };
 
     jQuery.fn.unwatch = function( id ) {
-    return this.each(function(){
-        clearInterval( $(this).data('watch_timer') );
-    });
-};
+        return this.each(function(){
+            clearInterval( $(this).data('watch_timer') );
+        });
+    };
 })( jQuery, window, document );
