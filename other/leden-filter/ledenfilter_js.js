@@ -1,6 +1,6 @@
 $(function(){
     $('.ledenfilter-wrapper').ledenFilter({
-        itemsLoaded : function(){};
+        itemsLoaded : function(){}
     });
 });
 
@@ -63,8 +63,18 @@ $(function(){
             obj.options.loggedIn = true;
         }
         
+        //check if the hash has a search term
+        if(location.hash.match('search=') != null) {
+            obj.get('search', location.hash.replace('#search=', ''));
+        }
+        //if the hash is filled for overview
+        else if(location.hash.match('overview=') != null) {
+            $(obj.options.tabClass + ' ul li').removeClass(obj.options.activeTabClass);
+            $('[data-char='+location.hash.replace('#overview=', '')+']').addClass(obj.options.activeTabClass);
+            this.get('overview', location.hash.replace('#overview=', ''));
+        }
         //if the hash is filled in, then select that one
-        if(location.hash != '') {
+        else if(location.hash != '') {
             obj.getDetail(location.hash.replace('#', ''), 'a');  
         }
         //get the first selection "a"
@@ -156,6 +166,8 @@ $(function(){
         $(obj.options.tabClass + ' ul li:not(.'+obj.options.activeTabClass+')').click(function(e){
             e.preventDefault();
             
+            location.hash = 'overview='+$(this).data('char');
+            
             //remove active state
             $(obj.options.tabClass + ' ul li').removeClass(obj.options.activeTabClass);
             $(this).addClass(obj.options.activeTabClass);
@@ -224,6 +236,9 @@ $(function(){
                 if(e.which == 13 && temp == 0) {
                     temp = 1;
     
+                    //set the hash
+                    location.hash = 'search='+$("#search").val();
+
                     //search for this value
                     obj.get('search', $("#search").val());
                     
