@@ -42,17 +42,26 @@
 	
 	// set the position
     Plugin.prototype.positionFooter = function () {           
-	     var obj = this,
-	     	$elem = $(this.element); 
+        var obj = this,
+            $elem = $(this.element); 
+
+         //first reset
+        $elem.prop("style", "");
+        $elem.attr("style", "");
          
-         obj.footerHeight = $elem.height();
-       
-		// is there a negativ marign?
-		if(obj.options.removeNegativMargin && $elem.css('margin-top')[0] == '-') {
-			$elem.css('margin-top', 0);	
-		}
-       
-		if ( ($(document.body).height()+(obj.footerHeight)) < $(window).height()) {
+        //set footer height
+        obj.footerHeight = $elem.height();
+
+        //set the top offset
+        var offset = $elem.offset();
+        offset = offset.top || 0;
+      
+        // is there a negativ marign?
+        if(obj.options.removeNegativMargin && $elem.css('margin-top')[0] == '-') {
+            $elem.css('margin-top', 0); 
+        }
+
+        if ( offset < ($(window).height()-(obj.footerHeight + 20))){
             //css
             var css = $.extend( {}, {
                 position: "fixed",
@@ -68,7 +77,7 @@
             $elem.attr("style", "");
             $elem.css(obj.options.css);
         }
-	};
+    };
 
     // A really lightweight plugin wrapper around the constructor,
     // preventing against multiple instantiations
