@@ -162,7 +162,7 @@ $(function(){
             obj = this;
             
         //set the click
-        $(obj.options.tabClass + ' ul li:not(.'+obj.options.activeTabClass+')').click(function(e){
+        $(obj.options.tabClass + ' ul li').click(function(e){
             e.preventDefault();
             
             location.hash = 'overview='+$(this).data('char');
@@ -201,7 +201,7 @@ $(function(){
         
         //otherwise remove the cursto hand
         } else {
-            $(obj.options.resultDiv + ' li.get-detail a').css('cursor', 'default');
+            $(obj.options.resultDiv + ' li.get-detail').css('cursor', 'default');
         }
     };
     

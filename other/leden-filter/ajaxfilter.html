@@ -2,18 +2,22 @@
 {if freebie_3 !="search" && freebie_4 == ""}
 	<h1>{exp:low_alphabet:uppercase text="{freebie_3}"}</h1>
 	{exp:low_alphabet:entries channel="zoo_visitor" status="Partners-id7" alpha_field="{member_bedrijfsnaam}" alpha_filter="{freebie_3}"}
-		<li class="get-detail">			
-			<a href="#" onClick="return false;">
+		<li class="overview-item" >			
+			<a class="get-detail" onClick="return false;">
 				<h3>{member_bedrijfsnaam}</h3>
 				<h5>{member_firstname} {member_lastname}</h5>
 				
 				<!--<h6></h6>-->
-				{embed="embeds/.afbeelding"
+				{exp:ce_img:pair 
 					src="{member_bedrijfslogo}" 
+					fallback_src="http://placehold.it/200x110" 
 					width="200" 
 					height="110" 
-					title="{member_foto_persoon}"
+					crop="yes" 
 				}
+					<img src="{made}" alt="{title}" title="{title}"/>
+				{/exp:ce_img:pair}
+				
 				<input type="hidden" name="{member_id}">
 			</a>
 		</li>
@@ -33,18 +37,21 @@
 	    parse="inward"}
 	    
 	    {exp:channel:entries status="Partners-id7" entry_id="{search_results}" disable="categories" dynamic="no" orderby="title" sort="asc"}
-			<li class="get-detail">
-				<a href="#" onClick="return false;">
-				<h3>{member_bedrijfsnaam}</h3>
-				<h5>{member_firstname} {member_lastname}</h5>
-				
-				<!--<h6></h6>-->
-				{embed="embeds/.afbeelding"
-					src="{member_bedrijfslogo}" 
-					width="200" 
-					height="110" 
-					title="{member_foto_persoon}"
-				}
+			<li class="overview-item" >			
+				<a class="get-detail" onClick="return false;">
+					<h3>{member_bedrijfsnaam}</h3>
+					<h5>{member_firstname} {member_lastname}</h5>
+					
+					<!--<h6></h6>-->
+					{exp:ce_img:pair 
+						src="{member_bedrijfslogo}" 
+						fallback_src="http://placehold.it/200x110" 
+						width="200" 
+						height="110" 
+						crop="yes" 
+					}
+						<img src="{made}" alt="{title}" title="{title}"/>
+					{/exp:ce_img:pair}
 						
 					<input type="hidden" name="{member_id}">
 				</a>
@@ -67,12 +74,14 @@
 						<h3>{member_bedrijfsnaam}</h3>
 						<h5>{member_firstname} {member_lastname}</h5>
 						
-						{embed="embeds/.afbeelding"
+						{exp:ce_img:pair 
 							src="{member_foto_persoon}" 
+							fallback_src="http://placehold.it/300" 
 							height="300" 
-							title="{member_foto_persoon}"
+							crop="yes" 
 						}
-				
+							<img src="{made}" alt="{title}" title="{title}"/>
+						{/exp:ce_img:pair}
 						
 						<h3>Privé gegevens:</h3>
 						<address>
@@ -85,12 +94,15 @@
 	    				</address>
 					</div>
 					<div class="right">
-						{embed="embeds/.afbeelding"
+						{exp:ce_img:pair 
 							src="{member_bedrijfslogo}" 
+							fallback_src="http://placehold.it/200x110" 
 							width="200" 
 							height="110" 
-							title="{member_foto_persoon}"
+							crop="yes" 
 						}
+							<img src="{made}" alt="{title}" title="{title}"/>
+						{/exp:ce_img:pair}
 						
 						<div class="member-detail-right">
 							<h3>{member_bedrijfsnaam}</h3>
