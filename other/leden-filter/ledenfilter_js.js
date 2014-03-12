@@ -1,7 +1,5 @@
 $(function(){
-    $('.ledenfilter-wrapper').ledenFilter({
-        itemsLoaded : function(){}
-    });
+    $('.ledenfilter-wrapper').ledenFilter();
 });
 
 ;(function ( $, window, document, undefined ) {
@@ -20,6 +18,7 @@ $(function(){
             loggedIn : false,
             restrict : true,
             searchDiv : "#search",
+            disableDetail : false,
             itemsLoaded : function(){}
         };
 
@@ -140,7 +139,7 @@ $(function(){
                 
                 //set the detail click
                 if((obj.options.loggedIn == true && obj.options.restrict == true) || (obj.options.restrict == false)) {
-                    obj.addDetailClick();
+                    obj.addDetailClick();                        
                 }
                 
                 //fire callback
@@ -185,18 +184,25 @@ $(function(){
         var $elem = $(this.element),
             obj = this;
 
-        $(obj.options.resultDiv + ' li a').click(function(event){
-            event.stopPropagation();
-
-            var id = $(this).children("input").attr("name");
-            var search_char = $(obj.options.tabClass + ' ul li.active').data('char');
-            
-            //set the hash
-            location.hash = id;
-            
-            //get the detail window
-            obj.getDetail(id, search_char);       
-        });
+        //set the click if this is not disable
+        if(obj.options.disableDetail == false) {
+            $(obj.options.resultDiv + ' li.get-detail').click(function(event){
+                event.stopPropagation();
+    
+                var id = $(this).children("input").attr("name");
+                var search_char = $(obj.options.tabClass + ' ul li.active').data('char');
+                
+                //set the hash
+                location.hash = id;
+                
+                //get the detail window
+                obj.getDetail(id, search_char);       
+            });
+        
+        //otherwise remove the cursto hand
+        } else {
+            $(obj.options.resultDiv + ' li.get-detail a').css('cursor', 'default');
+        }
     };
     
     //get the detail window

@@ -2,7 +2,7 @@
 {if freebie_3 !="search" && freebie_4 == ""}
 	<h1>{exp:low_alphabet:uppercase text="{freebie_3}"}</h1>
 	{exp:low_alphabet:entries channel="zoo_visitor" status="Partners-id7" alpha_field="{member_bedrijfsnaam}" alpha_filter="{freebie_3}"}
-		<li>			
+		<li class="get-detail">			
 			<a href="#" onClick="return false;">
 				<h3>{member_bedrijfsnaam}</h3>
 				<h5>{member_firstname} {member_lastname}</h5>
@@ -33,7 +33,7 @@
 	    parse="inward"}
 	    
 	    {exp:channel:entries status="Partners-id7" entry_id="{search_results}" disable="categories" dynamic="no" orderby="title" sort="asc"}
-			<li>
+			<li class="get-detail">
 				<a href="#" onClick="return false;">
 				<h3>{member_bedrijfsnaam}</h3>
 				<h5>{member_firstname} {member_lastname}</h5>
