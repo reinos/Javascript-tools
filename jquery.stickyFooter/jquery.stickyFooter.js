@@ -35,9 +35,11 @@
 		
 		obj.positionFooter();
 		
-    	$(window)
-               .scroll(function(){obj.positionFooter();})
-               .resize(function(){obj.positionFooter();});
+    	setTimeout(function(){
+            $(window)
+                .scroll(function(){obj.positionFooter();})
+                .resize(function(){obj.positionFooter();});
+        }, 100);
     };
 	
 	// set the position
